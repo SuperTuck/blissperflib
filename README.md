@@ -75,4 +75,5 @@ to *Arma 2\@Bliss\addons\dayz_server.pbo*
 
 **ENJOY THE DIFFERENCE**
 
-Feedbacks are welcome.  
+Special thanks to ayan4m1 and the bliss team, for the great bliss development:  
+[http://dayzprivate.com/](http://dayzprivate.com/)
