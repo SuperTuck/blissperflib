@@ -4,7 +4,7 @@ A small and easy to use performance library (.dll) for bliss (dayz server).
 
 The main intention of this development is to improve the performance of dayz server,  
 by replacing slow, resource hungry parts of script code, with c code.  
-Doing that on the rigth place in script code, you can get large improvements in performance.  
+Doing that on the right place in script code, you can get large improvements in performance.  
 The first step is to find the **bottlenecks** , that are frequently used and/or heavy proccesing parts in your script code.   
 A perfect example is the function **fnc\_split** wich is at least 2 times called for every
 call to hiveWrite and have to process very long strings.  
