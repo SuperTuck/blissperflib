@@ -10,7 +10,7 @@ A perfect example is the function **fnc\_split** wich is at least 2 times called
 call to hiveWrite and have to process very long strings.  
 Look at script code of **fnc\_split** what it does and compare it with the related c code.  
 The c function is here more then 100 times faster, if we have player with large inventory.  
-Keep in mind that if you have 50 players and more this may be the improvement you need to stabelize your server for long time.
+Keep in mind that if you have 30 players and more this may be the improvement you need to stabelize your server for long time.
 
 A simple profiler with logging feature is included in this library, to provide an easy way for profiling Arma 2 script code.
 
