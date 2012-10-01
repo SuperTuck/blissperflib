@@ -26,10 +26,10 @@ If you need function/codepart names in *blissperflib.log*, copy cfg/blissperflib
 **Profiler:**  
 To profile a script (or piece of code),	just insert the following lines at begin and end:  
 
-_PCID**25** = "profiler" callExtension "I:**25**";   
+_PCID**25** = "blissperflib" callExtension "I:**25**";   
 ...code...    
 ...code...    
-"profiler" callExtension format ["O:%1",_PCID**25**];  
+"blissperflib" callExtension format ["O:%1",_PCID**25**];  
 
 Where **25** represents a unique ID and must be replaced with a integer in range 0..255  
 (Make sure that in all .sqf functions, the **return variable** is always the last line!!!)  
