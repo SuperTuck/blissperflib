@@ -15,6 +15,8 @@ It makes use of callExtension, the IPC interface for Arma 2.
 **Installation:**  
 
 Compile *blissperflib.dll* from source /src or get this from here:  
+
+[https://github.com/fred41/blissperflib/blob/master/compiled/blissperflib.dll](https://github.com/fred41/blissperflib/blob/master/compiled/blissperflib.dll)
   
 Copy *blissperflib.dll* to your **Arma 2** directory.   
 If you need function/codepart names in *blissperflib.log*, copy blissperflib.ini to **Arma 2** directory or create your own here.
@@ -58,7 +60,7 @@ so this replacemnet will significant relax your server ressources.
 To use its improvement just do the following:  
 Replace the file *Repository\bliss\dayz_server\compile\fnc_split.sqf* with the file from here:  
 
-[https://github.com/fred41/DayZ-Private/blob/master/bliss/dayz_server/compile/fnc_split.sqf](https://github.com/fred41/DayZ-Private/blob/master/bliss/dayz_server/compile/fnc_split.sqf)  
+[https://github.com/fred41/blissperflib/blob/master/src/fnc_split.sqf](https://github.com/fred41/blissperflib/blob/master/src/fnc_split.sqf)
 
 Run repack.pl from your bliss repository and copy *Repository\deploy\@Bliss\addons\dayz_server.pbo*   
 to *Arma 2\@Bliss\addons\dayz_server.pbo*  
