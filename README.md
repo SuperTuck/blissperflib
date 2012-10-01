@@ -61,9 +61,11 @@ and last the name of this function/codepart
 *fnc\_split* is the first function replaced by a very fast c function included in this library (blissperflib.dll).   
 
 For big inventory strings, it is **more then 100 times faster!!!** then the .sqf code,   
-so this replacemnet will significant relax your server ressources.  
+so this replacement will realy relax your server ressources.  
 
-To use its improvement just do the following:  
+If you have a big server with 30+ players, i mean this is a **MUST**.
+
+To use this library function just do the following:  
 Replace the file *Repository\bliss\dayz_server\compile\fnc_split.sqf* with the file from here:  
 
 [https://github.com/fred41/blissperflib/blob/master/src/fnc_split.sqf](https://github.com/fred41/blissperflib/blob/master/src/fnc_split.sqf)
