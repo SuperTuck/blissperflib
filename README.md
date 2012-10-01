@@ -75,4 +75,4 @@ to *Arma 2\@Bliss\addons\dayz_server.pbo*
 
 **ENJOY THE DIFFERENCE**
 
-Feedbacks are wellcome.  
+Feedbacks are welcome.  
