@@ -73,4 +73,6 @@ Replace the file *Repository\bliss\dayz_server\compile\fnc_split.sqf* with the f
 Run repack.pl from your bliss repository and copy *Repository\deploy\@Bliss\addons\dayz_server.pbo*   
 to *Arma 2\@Bliss\addons\dayz_server.pbo*  
 
+**ENJOY THE SPEED**
+
 Feedbacks are wellcome.  
