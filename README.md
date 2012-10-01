@@ -1,14 +1,20 @@
 # blissperflib #
 
-A small performance library (.dll) for bliss (dayz server).
+A small and easy to use performance library (.dll) for bliss (dayz server).
 
-The main intention of this temporarily development is to improve the performance of dayz server,
-by replacing slow, resource hungry parts of script code, with c code.
+The main intention of this development is to improve the performance of dayz server,  
+by replacing slow, resource hungry parts of script code, with c code.  
+Doing that on the rigth place in script code, you can get large improvements in performance.  
+The first step is to find the **bottlenecks** , that are frequently used and/or heavy proccesing parts in your script code.   
+A perfect example is the function **fnc\_split** wich is at least 2 times called for every
+call to hiveWrite and have to process very long strings.  
+Look at script code of **fnc\_split** what it does and compare it with the related c code.  
+The c function is here more then 100 times faster, if we have player with large inventory.  
+Keep in mind that if you have 50 players and more this may be the improvement you need to stabelize your server for long time.
 
-The second purpose is to provide an easy way for profiling (performance measure) Arma 2 
-script code, to find hotspots/bottlenecks.
+A simple profiler with logging feature is included in this library, to provide an easy way for profiling Arma 2 script code.
 
-It makes use of callExtension, the IPC interface for Arma 2.
+The library functions are called via **callExtension**, the IPC interface for Arma 2.
 
 **How to use:**
 
@@ -73,7 +79,7 @@ Replace the file *Repository\bliss\dayz_server\compile\fnc_split.sqf* with the f
 Run repack.pl from your bliss repository and copy *Repository\deploy\@Bliss\addons\dayz_server.pbo*   
 to *Arma 2\@Bliss\addons\dayz_server.pbo*  
 
-**ENJOY THE DIFFERENCE**
+**ENJOY THE DIFFERENCE** and sorry for my english :/
 
 Special thanks to ayan4m1 and the bliss team, for the great bliss development:  
 [http://dayzprivate.com/](http://dayzprivate.com/)
