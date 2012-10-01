@@ -26,10 +26,10 @@ If you need function/codepart names in *blissperflib.log*, copy cfg/blissperflib
 **Profiler:**  
 To profile a script (or piece of code),	just insert the following lines at begin and end:  
 
-_PCID**25** = "blissperflib" callExtension "I:**25**";   
-...code...    
-...code...    
-"blissperflib" callExtension format ["O:%1",_PCID**25**];  
+`_PCID**25** = "blissperflib" callExtension "I:**25**";`   
+`...code...`    
+`...code...`    
+`"blissperflib" callExtension format ["O:%1",_PCID**25**];`  
 
 Where **25** represents a unique ID and must be replaced with a integer in range 0..255  
 (Make sure that in all .sqf functions, the **return variable** is always the last line!!!)  
@@ -37,24 +37,24 @@ Where **25** represents a unique ID and must be replaced with a integer in range
 To show real names in the log, there must be valid entrys in blissperflib.ini  
 example of blissperflib.ini:  
 
-[profiler]    
-23 = server_hiveWrite   
-24 = server_hiveReadWrite  
-25 = fnc_split   
+`[profiler]`    
+`23 = server_hiveWrite`   
+`24 = server_hiveReadWrite`  
+`25 = fnc_split`   
 
 Get a example here:  
 
 [https://github.com/fred41/blissperflib/blob/master/cfg/blissperflib.ini](https://github.com/fred41/blissperflib/blob/master/cfg/blissperflib.ini)
 
-The profiler output goes to Arma2Dir\blissperflib.log and looks like that:  
+The profiler output goes to Arma2Dir\blissperflib.log and a line looks like that:  
 
 `12:23:59 PT:   1 TC:      37 AD:    6.07ms    21.14ms : fnc_split`   
 
-PT: currently parallel threads (pseudo threads)  
-TC: total count of this function/codepart since server start  
-AD: average duration of this function/codepart  
-CD: current duration of this function/codepart  
-and last the name of this function/codepart  
+`PT: currently parallel threads (pseudo threads)`  
+`TC: total count of this function/codepart since server start`  
+`AD: average duration of this function/codepart`  
+`CD: current duration of this function/codepart`  
+`and last the name of this function/codepart`  
 
 
 **fnc\_split:**  
