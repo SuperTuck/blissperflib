@@ -34,7 +34,9 @@ void Init()
 	for(i=0; i<TSLISTLEN; i++)
 	{
 		sprintf_s(index, SMALSTRINGSIZE, "%u", i);
-		GetPrivateProfileString("profiler", index, "", ThreadStats[i].ThreadName, SMALSTRINGSIZE, ".\\blissperflib.ini");
+
+		if	(0 == GetPrivateProfileString("profiler", index, "", ThreadStats[i].ThreadName, SMALSTRINGSIZE, ".\\blissperflib.ini")) strcpy_s(ThreadStats[i].ThreadName, SMALSTRINGSIZE, index); 
+		
 		ThreadStats[i].TotalDuration = 0;
 		ThreadStats[i].Count = 0;
 //		add2log(ThreadNames[i].ThreadName);
@@ -101,7 +103,7 @@ extern "C" __declspec(dllexport) void __stdcall RVExtension(char *output, int ou
 		ThreadStats[ThreadType].TotalDuration += tn;
 		ThreadStats[ThreadType].Count += 1;
 
-		sprintf_s( tempS, FUNCTIONSIZE, "PT:%4u TC:%8u AD:%8.2fms %8.2fms : %s", ArmaThreadCount, ThreadStats[ThreadType].Count, ThreadStats[ThreadType].TotalDuration/ThreadStats[ThreadType].Count, tn, ThreadStats[ThreadType].ThreadName);
+		sprintf_s( tempS, FUNCTIONSIZE, "PT:%4u TC:%8u AD:%8.2fms CD:%8.2fms : %s", ArmaThreadCount, ThreadStats[ThreadType].Count, ThreadStats[ThreadType].TotalDuration/ThreadStats[ThreadType].Count, tn, ThreadStats[ThreadType].ThreadName);
 		add2log(tempS);
 
 		PerfCounterIndices[PCNextFreeIndexPut] = SavedIndex;
