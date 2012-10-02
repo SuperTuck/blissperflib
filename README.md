@@ -32,21 +32,21 @@ If you need function/codepart names in *blissperflib.log*, copy cfg/blissperflib
 **Profiler:**  
 To profile a script (or piece of code),	just insert the following lines at begin and end:  
 
-`_PCID25 = "blissperflib" callExtension "I:25";`   
+`_PCID19 = "blissperflib" callExtension "I:19";`   
 `...code...`    
 `...code...`    
-`"blissperflib" callExtension format ["O:%1",_PCID25];`  
+`"blissperflib" callExtension format ["O:%1",_PCID19];`  
 
-Where all **'25'** represents a unique ID and must be replaced with a integer in range 0..255  
+Where all **'19'** represents a unique ID and must be replaced with a integer in range 0..99  
 (Make sure that in all .sqf functions, the **return variable** is always the last line!!!)  
 
 To show real names in the log, there must be valid entrys in blissperflib.ini  
 example of blissperflib.ini:  
 
 `[profiler]`    
-`23 = server_hiveWrite`   
-`24 = server_hiveReadWrite`  
-`25 = fnc_split`   
+`18 = server_hiveReadWrite`   
+`19 = server_hiveWrite`  
+`20 = server_onPlayerConnect`   
 
 Get a .ini file example here:  
 

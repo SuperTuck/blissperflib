@@ -1,4 +1,4 @@
-_PCID25 = "blissperflib" callExtension "I:25";
+_PCID142 = "blissperflib" callExtension "I:14";
 private ["_string", "_separator", "_strar", "_separ", "_countstr", "_countsepstr", "_split", "_curidx", "_curstr", "_char", "_sepidx", "_sephelper", "_newidx", "_cchar", "_schar"];
 _string    = _this select 0;
 _separator = _this select 1;
@@ -55,5 +55,5 @@ if (_separator == "") then {
 		_split set [count _split, ""];
 	};
 };
-"blissperflib" callExtension format["O:%1",_PCID25];
+"blissperflib" callExtension format["O:%1",_PCID14];
 _split;
