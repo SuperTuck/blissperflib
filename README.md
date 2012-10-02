@@ -48,15 +48,15 @@ example of blissperflib.ini:
 `24 = server_hiveReadWrite`  
 `25 = fnc_split`   
 
-Get a example here:  
+Get a .ini file example here:  
 
-[https://github.com/fred41/blissperflib/blob/master/cfg/blissperflib.ini](https://github.com/fred41/blissperflib/blob/master/cfg/blissperflib.ini)
+[https://github.com/fred41/blissperflib/blob/master/example/blissperflib.ini](https://github.com/fred41/blissperflib/blob/master/example/blissperflib.ini)
 
 The profiler output goes to Arma2Dir\blissperflib.log and a line looks like that:  
 
 `12:23:59 PT:   1 TC:      37 AD:    6.07ms    21.14ms : fnc_split`   
 
-`PT: currently parallel threads (pseudo threads)`  
+`PT: currently parallel running pseudo threads (only investigated code counts)`  
 `TC: total count of this function/codepart since server start`  
 `AD: average duration of this function/codepart`  
 `CD: current duration of this function/codepart`  
