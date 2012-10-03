@@ -11,17 +11,13 @@ To have a fast responding server it is important, that we write our EH code with
 Now lets explain what `blissperflib.dll` can do for us and how it is to use.
 
 Essential part of this library is the included profiler. It works by collecting call statistics for code segments and logs all call statistic data to a logfile. All this works in realtime and logging works asynchron (in separat thread), so the profiler has nearly no impact to overall performance.
-Just lets run your prepared server with high load for a few hours and then evaluate `blissperflib.log`. So you can easily spot the bottlenecks and then start investigating the related code. 
+Just lets run your prepared server with high load for a few hours and then evaluate `blissperflib.log`. So you can easily spot the bottlenecks and then start investigating the related code or report your results to other developers. 
 
 In some cases it is useful or nessecary to replace script code by much faster c code.  
 This library supports you in this case too, by providing an easy to use interface template.   
-In the current bliss implementation, we can find a perfect example of such a bottleneck:  
-The function `fnc\_split`, wich is at least 2 times called for every call to hiveWrite and hiveReadWrite, and have to process very long strings.  
 
-Look at the script code of `fnc\_split` what it does and compare it with the related c code.  
-The related c function is here more then 100 times faster, especially if we have player with large inventory.  
-
-Realize that if you have 30 players and more this is a really important advantage and makes your server faster responding and freeing much server resources too.
+With the help of our profiler we can easily spot a perfect example of a bottleneck:  
+The function `fnc\_split` in the current bliss implementation. Read more below.  
 
 
 **How to use details and links:**
@@ -79,9 +75,7 @@ The profiler logging output goes to `Arma2Dir\blissperflib.log` and a line looks
 **fnc\_split:** (the first black sheep found)  
 `fnc\_split` is the first function replacment, implemented in this library (`blissperflib.dll`).   
 
-It is **more then 100 times faster!!!** then the related .sqf code,  
-so this replacement will realy relax your server ressources.  
-
+It is **more then 100 times faster!!!** then the related .sqf code.  
 If you have a big server with 30+ players, such optimization is noticeable for you and your players.
 
 If you only want use this library function just do the following:  
@@ -93,7 +87,9 @@ Run repack.pl from your bliss repository and copy `Repository\deploy\@Bliss\addo
 to `Arma 2\@Bliss\addons\dayz_server.pbo`  
 
 Just to clarify, it is **NOT NESSECARY** to prepare the profiler, if you only want use the optimized function('s) from the library.   
-All you need then is the installed `blissperflib.dll` and the related `.sqf` replacement, `fnc_split.sqf` for example. Thats all for now.
+All you need then is the installed `blissperflib.dll` and the related `.sqf` replacement, `fnc_split.sqf` for example.   
+
+Thats all for now. Let me know if you have ideas for improvements.
 
 **ENJOY THE DIFFERENCE** and sorry for my english :/
 
