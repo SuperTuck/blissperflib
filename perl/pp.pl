@@ -19,6 +19,7 @@ foreach $file (@files) {
 	{
 		print SQFFILE"$line";
 	}
+
 	$line = sprintf("\n\"blissperflib\" callExtension format[\"O:%%1\",_PCID%02d];\n", $i);
 	print SQFFILE "$line";
 	close(SQFFILE);
