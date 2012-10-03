@@ -17,7 +17,7 @@ In some cases it is useful or nessecary to replace script code by much faster c 
 This library supports you in this case too, by providing an easy to use interface template.   
 
 With the help of our profiler we can easily spot a perfect example of a bottleneck:  
-The function `fnc\_split` in the current bliss implementation. Read more below.  
+The function `fnc_split` in the current bliss implementation. Read more below.  
 
 
 **How to use details and links:**
@@ -56,9 +56,10 @@ To save much work there is a perl script prepprof.pl (prepare profiler) here:
 [https://github.com/fred41/blissperflib/blob/master/perl/prepprof.pl](https://github.com/fred41/blissperflib/blob/master/perl/prepprof.pl)
 
 Run `prepprof.pl` from your `repository` directory.
-It generates `blissperflib.ini` for you and inserts the two profiler code lines at begin and end in every .sqf file from a specified directory for you. A little handwork is nessecary, if you have functions in this directory, wich need the return variable as last line. Here, after running the script, you just have to move the return variable manually to the last line.  
-The default directory where the script is looking for .sqf files is `./bliss/dayz_server/compile`. There are mainly the server side event handlers placed. To change it currently you have to change it in `prepprof.pl`.  
-(If you are ready with profiling work, just restore the original files from repository or your backup.) 
+It generates `blissperflib.ini` for you and inserts the two profiler code lines at begin and end in every .sqf file from a specified directory for you. A little handwork is nessecary, if you have functions in this directory, wich need the return variable as last line. Here, after running the script, you just have to move the return variable manually to the last line.   
+(for example `fnc_replace, fnc_split, fnc_join, server_hiveReadWrite` are functions, wich return results!!!)   
+The default directory, where the script is looking for .sqf files is `./bliss/dayz_server/compile`. There are mainly the server side event handlers placed. To change it, currently you have to change it in `prepprof.pl` directly.  
+If we are ready with profiling work, we currently have to restore the original files from repository or your backup. 
 
 
 The profiler logging output goes to `Arma2Dir\blissperflib.log` and a line looks like that:  
@@ -73,7 +74,7 @@ The profiler logging output goes to `Arma2Dir\blissperflib.log` and a line looks
 
 
 **fnc\_split:** (the first black sheep found)  
-`fnc\_split` is the first function replacment, implemented in this library (`blissperflib.dll`).   
+`fnc_split` is the first function replacment, implemented in this library (`blissperflib.dll`).   
 
 It is **more then 100 times faster!!!** then the related .sqf code.  
 If you have a big server with 30+ players, such optimization is noticeable for you and your players.
