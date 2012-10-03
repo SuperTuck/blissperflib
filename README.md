@@ -8,19 +8,23 @@ We are talking here mainly about so called eventhandlers (EH's).
 EH's are scripted procedures/function wich are called on demand. For example, an EH can be executed if a public variable change. EH are currently running in the so called non scheduled environment in a **single thread**. This means there is only **one** running EH at the same time. So if one slow running EH is executed, all other events must wait in a queue.
 To have a fast responding server it is important, that we write our EH code with highest possible efficiency.
 
-The main intention of this development is to improve the performance of dayz server, 
-by finding slow segments in script code and do optimizing there. In some cases it is useful or nessecary to replace script code by much faster c code.  
-This library supports you in both, profiling the script code and, if useful, replacing with c code.   
-The first step in optimizing is always finding the **bottlenecks** , that are frequently used and/or heavy processing parts in your script code.   
-In the current bliss implementation, a perfect example of such a bottleneck is the function `fnc\_split`, wich is at least 2 times called for every call to hiveWrite and hiveReadWrite, and have to process very long strings.  
+Now lets explain what `blissperflib.dll` can do for us and how it is to use.
+
+Essential part of this library is the included profiler. It works by collecting call statistics for code segments and logs all call statistic data to a logfile. All this works in realtime and logging works asynchron (in separat thread), so the profiler has nearly no impact to overall performance.
+Just lets run your prepared server with high load for a few hours and then evaluate `blissperflib.log`. So you can easily spot the bottlenecks and then start investigating the related code. 
+
+In some cases it is useful or nessecary to replace script code by much faster c code.  
+This library supports you in this case too, by providing an easy to use interface template.   
+In the current bliss implementation, we can find a perfect example of such a bottleneck:  
+The function `fnc\_split`, wich is at least 2 times called for every call to hiveWrite and hiveReadWrite, and have to process very long strings.  
+
 Look at the script code of `fnc\_split` what it does and compare it with the related c code.  
 The related c function is here more then 100 times faster, especially if we have player with large inventory.  
+
 Realize that if you have 30 players and more this is a really important advantage and makes your server faster responding and freeing much server resources too.
 
-Essential part of this library is the profiler. It works by collecting call statistics for code segments and logs all call statistic data to a logfile. All this is in realtime and logging works asynchron (in separat thread), so the profiler has nearly no impact to overall performance. 
-All library functions, profiler included, are called via **callExtension**, the IPC interface for Arma 2.
 
-**How to use:**
+**How to use details and links:**
 
 **Installation:**  
 
@@ -30,7 +34,7 @@ Compile `blissperflib.dll` from source `/src` or get the library binary (`.dll`)
   
 Copy `blissperflib.dll` to your **Arma 2** directory.
    
-To obtain function/codepart names in *blissperflib.log* instead of numbers, there must be a blissperflib.ini file in Arma 2 directory (see below for syntax).
+To obtain function/codesegment names in `blissperflib.log` instead of numbers, there must be a blissperflib.ini file in Arma 2 directory (see below for syntax).
 
 **Profiler:**  
 To profile a script (or piece of code),	just insert the following lines at begin and end:  
@@ -44,20 +48,20 @@ Where **all** `'19'` represents a unique ID and must be replaced with a integer 
 (Make sure that in all .sqf functions, the **return variable** is always the last line!!!)  
 
 To show real names in the log, there must be valid entrys in blissperflib.ini  
-example of blissperflib.ini:  
+example of `blissperflib.ini`:  
 
 `[profiler]`    
 `18 = server_hiveReadWrite`   
 `19 = server_hiveWrite`  
 `20 = server_onPlayerConnect`   
 
-To save much work there is a perl script pp.pl (prepare for profiling) here:
+To save much work there is a perl script prepprof.pl (prepare profiler) here:
 
-[https://github.com/fred41/blissperflib/blob/master/perl/pp.pl](https://github.com/fred41/blissperflib/blob/master/perl/pp.pl)
+[https://github.com/fred41/blissperflib/blob/master/perl/prepprof.pl](https://github.com/fred41/blissperflib/blob/master/perl/prepprof.pl)
 
-It generates `blissperflib.ini` and inserts the two profiler code lines at begin and end in every .sqf file from a specified directory for you. A little handwork is nessecary, if you have functions in this directory, wich need the return variable as last line. Here, after running the script, you just have to move the return variable manually to the last line.  
-The default directory where the script is looking for .sqf files is `./bliss/dayz_server/compile`. There are mainly the server side event handlers placed.
-If you are ready with profiling work, just restore the original files from repository. 
+It generates `blissperflib.ini` for you and inserts the two profiler code lines at begin and end in every .sqf file from a specified directory for you. A little handwork is nessecary, if you have functions in this directory, wich need the return variable as last line. Here, after running the script, you just have to move the return variable manually to the last line.  
+The default directory where the script is looking for .sqf files is `./bliss/dayz_server/compile`. There are mainly the server side event handlers placed. To change it currently you have to change it in `prepprof.pl`.  
+If you are ready with profiling work, just restore the original files from repository or your backup. 
 
 
 The profiler logging output goes to `Arma2Dir\blissperflib.log` and a line looks like that:  
@@ -71,13 +75,13 @@ The profiler logging output goes to `Arma2Dir\blissperflib.log` and a line looks
 `and last the name of this function/codesegment`  
 
 
-**fnc\_split:**  
-`fnc\_split` is the first function replacment implemented in this library (`blissperflib.dll`).   
+**fnc\_split:** (the first black sheep found)  
+`fnc\_split` is the first function replacment, implemented in this library (`blissperflib.dll`).   
 
 It is **more then 100 times faster!!!** then the related .sqf code,  
 so this replacement will realy relax your server ressources.  
 
-If you have a big server with 30+ players, i mean such optimization is a **MUST**.
+If you have a big server with 30+ players, such optimization is noticeable for you and your players.
 
 If you only want use this library function just do the following:  
 Replace the file `Repository\bliss\dayz_server\compile\fnc_split.sqf` with the file from here:  
@@ -87,8 +91,8 @@ Replace the file `Repository\bliss\dayz_server\compile\fnc_split.sqf` with the f
 Run repack.pl from your bliss repository and copy `Repository\deploy\@Bliss\addons\dayz_server.pbo`   
 to `Arma 2\@Bliss\addons\dayz_server.pbo`  
 
-Just to clarify, it is **NOT NESSECARY** to prepare the profiler if you only want use the optimized function('s) from the library.   
-All you need then is the installed `blissperflib.dll` and the related .sqf replacement, `fnc_split.sqf` for example.
+Just to clarify, it is **NOT NESSECARY** to prepare the profiler, if you only want use the optimized function('s) from the library.   
+All you need then is the installed `blissperflib.dll` and the related `.sqf` replacement, `fnc_split.sqf` for example. Thats all for now.
 
 **ENJOY THE DIFFERENCE** and sorry for my english :/
 
